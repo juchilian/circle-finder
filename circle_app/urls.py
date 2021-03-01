@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from circle.views import circle_list_view
 
 urlpatterns = [
+    path('', circle_list_view),
     path('admin/', admin.site.urls),
 ]

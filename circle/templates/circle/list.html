@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if title %}
+    <h1 class="my-3">{{ title }}</h1>
+    <!-- {% if request.user.is_authenticated %} -->
+    <!-- {% endif %} -->
+{% endif %}
+
+    <div class="row">
+        {% for circle in circles %}
+            <div class="col-6">
+                <!-- <img url=""> -->
+                <p>{{ circle.title }}</p>
+                <p>{{ circle.description }}</p>
+            </div>
+        {% empty %}
+            <li>現在掲載されているサークルはありません</li>
+        {% endfor %}
+    </div>
+
+
+{% endblock content %}
