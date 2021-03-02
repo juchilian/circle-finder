@@ -6,18 +6,28 @@
     <!-- {% if request.user.is_authenticated %} -->
     <!-- {% endif %} -->
 {% endif %}
+<div class="mx-auto">
 
-    <div class="row">
-        {% for circle in circles %}
-            <div class="col-6">
-                <!-- <img url=""> -->
-                <p>{{ circle.title }}</p>
-                <p>{{ circle.description }}</p>
+    {% for circle in circles %}
+        <div class="card mb-3" style="max-width: 540px">
+            <div class="row no-gutters">
+                <div class="col-md-4 my-auto">
+                    <img class="card-img" src="{{ circle.image }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/circle/{{circle.id}}">{{ circle.name }}</a></h5>
+                        <p>{{ circle.description|truncatechars:30 }}</p>
+                        <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
+                        <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
+                    </div>
+                </div>
             </div>
-        {% empty %}
-            <li>現在掲載されているサークルはありません</li>
-        {% endfor %}
-    </div>
+        </div>
+    {% empty %}
+        <li>現在掲載されているサークルはありません</li>
+    {% endfor %}
+</div>
 
 
 {% endblock content %}
