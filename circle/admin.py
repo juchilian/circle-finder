@@ -1,4 +1,11 @@
 from django.contrib import admin
 from .models import Circle
-# Register your models here.
-admin.site.register(Circle)
+
+class CircleAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'owner']
+    search_fields = ['name']
+
+    class Meta:
+        model = Circle
+
+admin.site.register(Circle, CircleAdmin)

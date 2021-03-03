@@ -10,3 +10,7 @@ class Circle(models.Model):
     description = models.TextField(null=True, blank=True, max_length=400)
     twitter_url = models.URLField(null=True, blank=True)
     insta_url = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
