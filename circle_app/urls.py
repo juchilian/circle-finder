@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from circle.views import circle_list_view,circle_detail_view
 
 urlpatterns = [
     path('', circle_list_view),
+    path('accounts/', include('allauth.urls')),
     path('circle/<int:circle_id>/', circle_detail_view),
     path('admin/', admin.site.urls),
 ]
