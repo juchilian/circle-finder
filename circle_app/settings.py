@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'bootstrap4',
     'storages',
+    'import_export',
     # My apps
     'circle',
 ]
