@@ -37,10 +37,13 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Django Allauth settings
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_LOGOUT_ON_GET = True
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',

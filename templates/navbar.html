@@ -11,14 +11,14 @@
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="/mypage">マイページ</a>
+        <a class="nav-link" href="/accounts/mypage">マイページ</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/accounts/logout">ログアウト</a>
+        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
       </li>
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="/accounts/login">ログイン</a>
+        <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
       </li>
       {% endif%}
       

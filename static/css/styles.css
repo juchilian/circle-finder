@@ -1,0 +1,13 @@
+.fadeout {
+  animation : fadeOut 3s;
+  transition-timing-function : step-end;
+  animation-fill-mode: both;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
