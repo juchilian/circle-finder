@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if my_circle %}
+    <h1>{{ request.user }}さんのサークル</h1>
+    {% include 'circle/circle-card.html' with circle=my_circle %}
+{% endif %}
+
+{% if keep_circles %}
+<h1>ようこそ{{ request.user }}さん</h1>
+<h3>keepサークル一覧</h3>
+<ul>
+    <li>keepサークル一覧</li>
+</ul>
+{% endif %}
+
+{% endblock %}
