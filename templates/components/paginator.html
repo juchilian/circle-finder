@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if not prev_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ prev_page_url }}" tabindex="-1" aria-disabled="true">&laquo;</a>
+        </li>
+        {% for n in page.paginator.page_range %}
+            {% if page.number == n %}
+                <li class="page-item active" aria-current="page">
+                    <a href="?page={{n}}" class="page-link">{{ n }}<span class="sr-only">(current)</span></a>
+                </li>
+            {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+                <li class="page-item"><a class="page-link" href="?page={{n}}">{{ n }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not next_page_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_page_url }}">&raquo;</a>
+        </li>
+    </ul>
+</nav>

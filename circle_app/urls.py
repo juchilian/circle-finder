@@ -24,8 +24,8 @@ from circle.views import circle_list_view,circle_detail_view, circle_edit_view
 urlpatterns = [
     path('', circle_list_view),
     path('accounts/', include('allauth.urls')),
-    path('circle/<int:circle_id>/', circle_detail_view),
-    path('circle/<int:circle_id>/edit/', circle_edit_view),
+    path('circle/<slug:slug>/', circle_detail_view),
+    path('circle/<slug:slug>/edit/', circle_edit_view),
     path('mypage/', mypage_view),
     path('admin/', admin.site.urls),
 ]

@@ -6,9 +6,8 @@
     <!-- {% if request.user.is_authenticated %} -->
     <!-- {% endif %} -->
 {% endif %}
-<div class="mx-auto">
-
-    {% for circle in circles %}
+<div class="justify-content-center">
+    {% for circle in page.object_list %}
         <div class="card mb-3" style="max-width: 540px">
             <div class="row no-gutters">
                 <div class="col-md-4 my-auto">
@@ -16,7 +15,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="/circle/{{circle.id}}">{{ circle.name }}</a></h5>
+                        <h5 class="card-title"><a href="/circle/{{circle.slug}}">{{ circle.name }}</a></h5>
                         <p>{{ circle.description|truncatechars:30 }}</p>
                         <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
                         <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
@@ -27,6 +26,7 @@
     {% empty %}
         <li>現在掲載されているサークルはありません</li>
     {% endfor %}
+    {% include 'components/paginator.html' %}
 </div>
 
 
