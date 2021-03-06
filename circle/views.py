@@ -12,15 +12,15 @@ def circle_list_view(request):
     template_name = 'circle/list.html'
     return render(request, template_name, context)
     
-def circle_detail_view(request, circle_id):
-    circle = get_object_or_404(Circle, id=circle_id)
+def circle_detail_view(request, slug):
+    circle = get_object_or_404(Circle, slug=slug)
     context = {"title": "サークル詳細" ,"circle": circle}
     template_name = 'circle/detail.html'
     return render(request, template_name, context)
 
 @staff_member_required
-def circle_edit_view(request, circle_id):
-    circle = get_object_or_404(Circle, id=circle_id)
+def circle_edit_view(request, slug):
+    circle = get_object_or_404(Circle, slug=slug)
     if circle.owner == request.user:
         form = CircleModelForm(request.POST or None, instance=circle)
         if form.is_valid():
