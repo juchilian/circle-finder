@@ -5,6 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 class Circle(models.Model):
     owner = models.ForeignKey(User, verbose_name='代表者', default=1, null=True, on_delete=models.SET_NULL)
+    slug = models.SlugField(verbose_name='スラッグ', unique=True)
     image = models.ImageField(verbose_name='サークル画像', upload_to='media/image/', blank=True, null=True)
     name =  models.CharField(verbose_name='サークル名', max_length=100)
     description = models.TextField(verbose_name='概要', null=True, blank=True, max_length=400)
