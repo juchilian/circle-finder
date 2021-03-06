@@ -6,9 +6,8 @@
     <!-- {% if request.user.is_authenticated %} -->
     <!-- {% endif %} -->
 {% endif %}
-<div class="mx-auto">
-
-    {% for circle in circles %}
+<div class="justify-content-center">
+    {% for circle in page.object_list %}
         <div class="card mb-3" style="max-width: 540px">
             <div class="row no-gutters">
                 <div class="col-md-4 my-auto">
@@ -27,6 +26,7 @@
     {% empty %}
         <li>現在掲載されているサークルはありません</li>
     {% endfor %}
+    {% include 'components/paginator.html' %}
 </div>
 
 
