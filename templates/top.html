@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if title %}
+    <h1 class="my-3">ようこそ{{ request.user }}さん</h1>
+    <img src="/media/img/tennis.map" style="background-image: center/cover;">
+{% endif %}
+<div class="justify-content-center">
+    {% for circle in circles %}
+        <div class="card mb-3" style="max-width: 540px">
+            <div class="row no-gutters">
+                <div class="col-md-4 my-auto">
+                    <img class="card-img" src="{{ circle.image.url }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/circle/{{circle.slug}}">{{ circle.name }}</a></h5>
+                        <p>{{ circle.description|truncatechars:30 }}</p>
+                        <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
+                        <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <li>現在掲載されているサークルはありません</li>
+    {% endfor %}
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" onclick="location.href='/circle/'">サークル一覧を見る</button>
+
+    </div>
+</div>
+
+
+{% endblock content %}

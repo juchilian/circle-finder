@@ -17,15 +17,16 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import mypage_view
-from circle.views import circle_list_view,circle_detail_view, circle_edit_view
+from .views import mypage_view, top_view
 
+admin.site.site_title = 'タイトルタグ' 
+admin.site.site_header = 'サークルファインダー 管理サイト' 
+admin.site.index_title = 'メニュー'
 
 urlpatterns = [
-    path('', circle_list_view),
+    path('', top_view),
     path('accounts/', include('allauth.urls')),
-    path('circle/<slug:slug>/', circle_detail_view),
-    path('circle/<slug:slug>/edit/', circle_edit_view),
+    path('circle/', include('circle.urls')),
     path('mypage/', mypage_view),
     path('admin/', admin.site.urls),
 ]
