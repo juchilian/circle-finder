@@ -33,6 +33,9 @@ class Circle(models.Model):
     def __str__(self):
         return self.name
 
+    def num_likes(self):
+        return self.liked.all().count()
+        
     class Meta:
         ordering = ['id']
 

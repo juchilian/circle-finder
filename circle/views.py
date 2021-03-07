@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Circle, Like
 from .forms import CircleModelForm
@@ -80,5 +80,9 @@ def circle_like_unlike(request):
 
             circle_obj.save()
             like.save()
+        data = {
+            'value': like.value,
+        }
+        return JsonResponse(data, safe=False)
     return redirect('circle:main-circle-view')
         
