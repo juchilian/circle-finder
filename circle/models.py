@@ -28,10 +28,28 @@ class Circle(models.Model):
     practice_place = models.CharField(verbose_name='活動場所',max_length=20, default='')
     twitter_url = models.URLField(verbose_name='Twitter',null=True, blank=True)
     insta_url = models.URLField(verbose_name='Instagram', null=True, blank=True)
+    liked = models.ManyToManyField(User, blank=True, related_name='likes')
 
     def __str__(self):
         return self.name
 
+    def num_likes(self):
+        return self.liked.all().count()
+        
     class Meta:
         ordering = ['id']
-    
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike'),
+)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    circle = models.ForeignKey(Circle, on_delete=models.CASCADE)
+    value = models.CharField(choices=LIKE_CHOICES, max_length=8)
+    updated = models.DateTimeField(auto_now=True) 
+    updated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}-{self.circle}-{self.value}"

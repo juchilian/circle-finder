@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
-from .models import Circle
+from .models import Circle, Like
 
 class CircleResource(resources.ModelResource):
     class Meta:
@@ -16,4 +16,4 @@ class CircleAdmin(ImportExportModelAdmin):
     resource_class = CircleResource
 
 
-# admin.site.register(Circle, CircleAdmin)
+admin.site.register(Like)

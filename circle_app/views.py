@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from circle.models import Circle
+from circle.models import Circle, Like
 
 def top_view(request):
     template_name = 'top.html'
@@ -12,11 +12,9 @@ def mypage_view(request):
         my_circle = Circle.objects.all().filter(owner=request.user).first()
         # my_circle = get_object_or_404(Circle, owner=request.user)
         context = {"my_circle": my_circle}
+        user_likes = Like.objects.filter(user=request.user, value__iexact='Like')
+        context = {"my_circle": my_circle, "user_likes": user_likes}
         return render(request, template_name, context)
     
-    else: # 生徒なら
-        # keep_circles = Circle.objects.filter(id=request.user.keep)
-        context = {"keep_circles": keep_circles}
-        return render(request, template_name, context)
 
 

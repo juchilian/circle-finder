@@ -6,3 +6,9 @@
     </div>
     {% endfor %}
 {% endif %}
+
+{% block myJs%}
+<script>
+    $(".alert").delay(2000).fadeOut(1000)
+</script>
+{% endblock myJs%}
