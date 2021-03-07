@@ -8,13 +8,16 @@
                 <form action="{% url 'circle:like-circle-view' %}" method="POST" class="like-form" id='{{circle.id}}'>
                     {% csrf_token %}
                     <input type="hidden" name='circle_id' value="{{circle.id}}">
-                    <button type="submit" class="btn like-btn{{circle.id}}">
-                        {% if request.user not in circle.liked.all %}
+                    {% if request.user not in circle.liked.all %}
+                        <button type="submit" class="btn btn-light border like-btn{{circle.id}}">
                             Like
+                        </button>
                         {% else %}
-                            UnLike
-                        {% endif %}
-                    </button>
+                        <button type="submit" class="btn btn-primary like-btn{{circle.id}}">
+                            Unlike
+                        </button>
+                        
+                    {% endif %}
                     <!-- <div class="ui grid">
                         <div class="column">
                             <div class="like-count{{circle.id}}"> {{circle.num_likes}} </div>
