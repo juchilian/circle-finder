@@ -78,11 +78,11 @@ def circle_like_unlike(request):
         else:
             like.value='Like'
 
-            circle_obj.save()
-            like.save()
+        circle_obj.save()
+        like.save()
         data = {
             'value': like.value,
         }
         return JsonResponse(data, safe=False)
-    return redirect('circle:main-circle-view')
+    # return redirect('circle:main-circle-view')
         
