@@ -7,7 +7,7 @@
         <img src="/media/media/image/tennis_map.jpg" class="w-100 card-img">
     </div>
 </div>
-<!-- <div style="background: center/cover url('/media/media/image/tennis_map.jpg'); height: 200px"></div> -->
+
 <div class="justify-content-center">
     {% for circle in circles %}
         <div class="card mb-3" style="max-width: 540px">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="/circle/{{circle.slug}}">{{ circle.name }}</a></h5>
+                        <h5 class="card-title"><a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a></h5>
                         <p>{{ circle.description|truncatechars:30 }}</p>
                         <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
                         <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>

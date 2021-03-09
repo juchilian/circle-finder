@@ -21,16 +21,8 @@
                         </button>
                         
                     {% endif %}
-                    <!-- <div class="ui grid">
-                        <div class="column">
-                            <div class="like-count{{circle.id}}"> {{circle.num_likes}} </div>
-                        </div>
-                        <div class="column">
-                            likes
-                        </div>
-                    </div> -->
                 </form>
-                <h5 class="card-title"><a href="/circle/{{circle.slug}}">{{ circle.name }}</a></h5>
+                <h5 class="card-title"><a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a></h5>
                 <p>{{ circle.description }}</p>
                 <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
                 <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>

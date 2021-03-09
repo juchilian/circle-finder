@@ -16,7 +16,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="/circle/{{circle.slug}}">{{ circle.name }}</a>
+                            <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a>
                         </h5>
                         <p>{{ circle.description|truncatechars:30 }}</p>
                         <div class="bar-container mb-3">
