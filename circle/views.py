@@ -57,11 +57,11 @@ def circle_edit_view(request, slug):
 
 @login_required
 def circle_like_unlike(request):
+    print(request.method)
     user = request.user
     if request.method == 'POST':
         circle_id = request.POST.get('circle_id')
         circle_obj = Circle.objects.get(id=circle_id)
-        # user = User.objects.get(user=user)
 
         if user in circle_obj.liked.all():
             circle_obj.liked.remove(user)
@@ -83,6 +83,11 @@ def circle_like_unlike(request):
         data = {
             'value': like.value,
         }
+        print('Json', data)
         return JsonResponse(data, safe=False)
-    # return redirect('circle:main-circle-view')
+    # next_url = request.GET.get()
+    circle_id = request.POST.get('circle_id')
+    circle_obj = Circle.objects.get(id=circle_id)
+    url = circle_obj.slug
+    return redirect(f'/circle/{url}')
         

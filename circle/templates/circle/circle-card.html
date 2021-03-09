@@ -1,3 +1,6 @@
+{% block customCss %}
+    
+{% endblock %}
 <div class="card mb-3" style="max-width: 540px">
     <div class="row no-gutters">
         <div class="col-md-4 my-auto">
@@ -44,11 +47,14 @@
     $(document).ready(function() {
         $('.like-form').submit(function(e) {
             e.preventDefault()
+            {% if request.user.is_authenticated %}
+            // user is logged in
             const circle_id = $(this).attr('id')
             const likeBtn = $(`.like-btn${circle_id}`)
             const likeText = likeBtn.text()
             const trim = $.trim(likeText)
 
+            // const url = '{% url 'circle:like-circle-view' %}'
             const url = $(this).attr('action')
             // let res;
             // const likes = $(`.like-count${circle_id}`).text()
@@ -73,10 +79,17 @@
                     }
                 },
                 error: function(response) {
-                    
                     console.log('error', response);
                 }
             })
+            {% else %}
+            // not logged in
+                if(window.confirm('この機能を使うにはログインが必要です。\nログインしますか？')){
+                    next_url = location.pathname
+                    redirect_url = "{% url 'account_login' %}" + "?next=" + next_url
+                    window.location = redirect_url
+                }
+            {% endif %}
         })
     })
 

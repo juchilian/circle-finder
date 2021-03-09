@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if title %}
-    <h1 class="my-3">ようこそ{{ request.user }}さん</h1>
-    <img src="/media/img/tennis.map" style="background-image: center/cover;">
-{% endif %}
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="card-title">慶應テニサー早見表</h5>
+        <img src="/media/media/image/tennis_map.jpg" class="w-100 card-img">
+    </div>
+</div>
+<!-- <div style="background: center/cover url('/media/media/image/tennis_map.jpg'); height: 200px"></div> -->
 <div class="justify-content-center">
     {% for circle in circles %}
         <div class="card mb-3" style="max-width: 540px">

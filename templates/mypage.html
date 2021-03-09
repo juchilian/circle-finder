@@ -11,7 +11,7 @@
 <h3>likeサークル一覧</h3>
 
 {% for user_like in user_likes %}
-<p><a href="">{{ user_like.circle.name }}</a></p>
+<p><a href="{% url 'circle:detail-circle-view' slug=user_like.circle.slug %}">{{ user_like.circle.name }}</a></p>
 {% empty %}
 <p>現在Likeしたサークルはありません</p>
 {% endfor %}

@@ -8,17 +8,45 @@
 {% endif %}
 <div class="justify-content-center">
     {% for circle in page.object_list %}
-        <div class="card mb-3" style="max-width: 540px">
+        <div class="card shadow mb-3">
             <div class="row no-gutters">
-                <div class="col-md-4 my-auto">
-                    <img class="card-img" src="{{ circle.image.url }}">
+                <div class="col-md-4 my-auto" style="background: center/cover url('{{ circle.image.url }}'); height: 200px">
+                    <!-- <img class="card-img bg-img" src="{{ circle.image.url }}"> -->
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="/circle/{{circle.slug}}">{{ circle.name }}</a></h5>
+                        <h5 class="card-title">
+                            <a href="/circle/{{circle.slug}}">{{ circle.name }}</a>
+                        </h5>
                         <p>{{ circle.description|truncatechars:30 }}</p>
-                        <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
-                        <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">活動</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">緩</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" id="customRange2" style="float: left" disabled>
+                                <p class="mb-0" style="font-size: 15px;">厳</p>
+                            </div>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">男女比</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">男</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" id="customRange2" style="float: left" disabled>
+                                <p class="mb-0" style="font-size: 15px;">女</p>
+                            </div>
+                        </div>
+                        <div class="bar-container">
+                            <p class="text-center mb-0">お酒</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">無</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" id="customRange2" style="float: left" disabled>
+                                <p class="mb-0" style="font-size: 15px;">呑</p>
+                            </div>
+                        </div>
+                        <!-- <div class="sns-link-container">
+                            <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
+                            <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
+                        </div> -->
                     </div>
                 </div>
             </div>
