@@ -8,6 +8,66 @@
     </div>
 </div>
 
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center my-3">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">自分に合ったサークルを見つける</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">最適サークル診断</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="modal-body">
+                <form action="{% url 'circle:search-circle-view'%}"> {% csrf_token %}
+                    <div class="bar-container mb-3">
+                        <p class="text-center mb-0">活動</p>
+                        <div class="d-flex justify-content-center">
+                            <p class="mb-0" style="font-size: 15px;">緩</p>
+                            <input type="range" class="form-range w-75 " min="0" max="4" id="hard" style="float: left">
+                            <p class="mb-0" style="font-size: 15px;">厳</p>
+                        </div>
+                    </div>
+                    <div class="bar-container mb-3">
+                        <p class="text-center mb-0">男女比</p>
+                        <div class="d-flex justify-content-center">
+                            <p class="mb-0" style="font-size: 15px;">男</p>
+                            <input type="range" class="form-range w-75 " min="0" max="4" id="genderRatio" style="float: left">
+                            <p class="mb-0" style="font-size: 15px;">女</p>
+                        </div>
+                    </div>
+                    <div class="bar-container">
+                        <p class="text-center mb-0">お酒</p>
+                        <div class="d-flex justify-content-center">
+                            <p class="mb-0" style="font-size: 15px;">無</p>
+                            <input type="range" class="form-range w-75 " min="0" max="4" id="alcohol" style="float: left">
+                            <p class="mb-0" style="font-size: 15px;">呑</p>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'circle:search-circle-view' %}'">検索する</button>
+            </div>
+            {% else %}
+            <div class="modal-body">
+                この機能を使うにはログインが必要です。
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'account_login' %}'">ログインする</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 <div class="justify-content-center">
     {% for circle in circles %}
         <div class="card mb-3" style="max-width: 540px">
@@ -33,6 +93,11 @@
 
     </div>
 </div>
-
-
 {% endblock content %}
+
+{% block myJs %}
+<script>
+    //id  hard genderRatio alcohol
+</script>
+{% endblock %}
+

@@ -90,4 +90,10 @@ def circle_like_unlike(request):
     circle_obj = Circle.objects.get(id=circle_id)
     url = circle_obj.slug
     return redirect(f'/circle/{url}')
+
+def circle_search_view(request):
+    searched_circles = Circle.objects.all()[:3]
+    context = {"title": "サークル検索結果", 'circles': searched_circles}
+    template_name = 'circle/searched.html'
+    return render(request, template_name, context)
         
