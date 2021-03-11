@@ -1,5 +1,26 @@
-{% block customCss %}
-    
+{% block myCss %}
+<style>
+.social-icons {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 1rem 0 0 0;
+    padding: 0;
+}
+
+.social-icons li {
+    flex-grow: 1;
+    margin-right: 2rem;
+    text-align: left;
+    max-width: 22px;
+}
+
+.svg-icon {
+    max-width: 22px;
+    display: inline-block;
+}
+</style>
 {% endblock %}
 <div class="card mb-3" style="max-width: 540px">
     <div class="row no-gutters">
@@ -18,14 +39,41 @@
                         {% else %}
                         <button type="submit" class="btn btn-primary like-btn{{circle.id}}">
                             Unlike
-                        </button>
-                        
+                        </button>                    
                     {% endif %}
                 </form>
-                <h5 class="card-title"><a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a></h5>
+                {% if not detail %}
+                <!-- 一覧ページの場合 -->
+                <h5 class="card-title">
+                    <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a>
+                </h5>
+                {% else %} 
+                <!-- 詳細ページの場合 -->
+                <h5 class="card-title">{{ circle.name }}</h5>
                 <p>{{ circle.description }}</p>
-                <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
-                <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
+                <ul class="social-icons">
+                    {% if circle.twitter_url %}
+                    <li><a href="{{circle.twitter_url}}" target="_blank">
+                        <span style="color: #1DA1F2;"></span>
+                        <i class="fab fa-twitter fa-lg svg-icon"></i>
+                    </a></li>
+                    {% endif %}
+                    {% if circle.insta_url %}
+                    <li><a href="{{circle.insta_url}}" target="_blank">
+                        <span style="color: #CF2E92;">
+                            <i class="fab fa-instagram fa-lg svg-icon"></i>
+                        </span>
+                    </a></li>
+                    {% endif %}
+                    {% if circle.line_url %}
+                    <li class="disabled"><a href="{{circle.line_url}}" target="_blank">
+                        <span style="color: #00B900;">
+                            <i class="fab fa-line fa-lg svg-icon"></i>
+                        </span>
+                    </a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
             </div>
         </div>
     </div>

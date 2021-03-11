@@ -1,9 +1,84 @@
 {% extends "base.html" %}
+{% block myCss %}
+<style>
+.carousel-my-caption {
+    background-color:rgba(248,249,250, 0.8);;
+    position: absolute;
+    right: 15%;
+    bottom: 0.5rem;
+    left: 15%;
+    z-index: 10;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #fff;
+    text-align: center;
+}
+
+.jumbotron-extend {
+    background: url(/media/media/image/tennis2.jpg) no-repeat center center;
+    background-size: cover;
+}
+.text{
+    text-align: center;
+    position:relative;
+}
+.text h1{
+    position:relative;
+    text-align: left;
+    display: inline-block;
+}
+.text h7{
+    text-align: left;
+    display: inline-block;
+}
+.backimg{
+    z-index: -1;
+    position:absolute;
+    height: auto;
+    width:35vw;
+}
+</style>
+{% endblock %}
 
 {% block content %}
+
+<div id="carouselExampleIndicators" class="carousel slide my-3" data-ride="carousel" data-touch="true">
+    <!-- <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol> -->
+
+    <div class="carousel-inner">
+        {% for circle in circles %}
+            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <img src="{{ circle.image.url }}" class="d-block slide w-100" style="height: 200px; object-fit:cover;" alt="{{ circle.name}}画像">
+                <div class="carousel-my-caption">
+                    <p class="m-0 font-weight-bold text-shadow text-dark">{{ circle.name }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- <div class="jumbotron jumbotron-fluid jumbotron-extend">
+    <div class="container-fluid">
+        <h1>慶應テニサープラットフォーム</h1>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">CONTACT ME</a></p>
+    </div>
+</div> -->
+
 <div class="card my-3">
-    <div class="card-body">
-        <h5 class="card-title">慶應テニサー早見表</h5>
+    <div class="card-body p-1">
+        <h5 class="card-title text-center">慶應テニサーマップ</h5>
         <img src="/media/media/image/tennis_map.jpg" class="w-100 card-img">
     </div>
 </div>
@@ -23,7 +98,7 @@
             </div>
             {% if request.user.is_authenticated %}
             <div class="modal-body">
-                <form action="{% url 'circle:search-circle-view'%}"> {% csrf_token %}
+                <form action="{% url 'circle:search-circle-view'%}" class="search-form"> {% csrf_token %}
                     <div class="bar-container mb-3">
                         <p class="text-center mb-0">活動</p>
                         <div class="d-flex justify-content-center">
@@ -52,7 +127,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'circle:search-circle-view' %}'">検索する</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='{% url 'circle:search-circle-view' %}'">検索する</button>
             </div>
             {% else %}
             <div class="modal-body">
@@ -67,8 +142,24 @@
     </div>
 </div>
 
+<article>
+    <div class="contents mt-5">
+        <img src="/media/media/image/puzzle.jpg" alt="" class="backimg ms-5">
+        <div class="text pt-5">
+            <h2 class="pt-3">サークル探し<br>多すぎてわからない</h2><br><br>
+            <div class="text-1">
+                <p>慶應のテニスサークルが多すぎて<br>どう探したらいいか分からない...<br>友達増やすためにサークル探し！</p><br>
+                <p>自分に合ったサークル探すなら... </p>
+                <div class="d-flex justify-content-center my-3">
+                    <button onclick="location.href='{% url 'circle:list-circle-view' %}'" class="btn btn-primary">サークル一覧を見る</button>
+                </div>
+            </div>
+        </div>		
+    </div>
+</article>		
 
-<div class="justify-content-center">
+
+<!-- <div class="justify-content-center">
     {% for circle in circles %}
         <div class="card mb-3" style="max-width: 540px">
             <div class="row no-gutters">
@@ -92,12 +183,19 @@
         <button class="btn btn-primary" onclick="location.href='/circle/'">サークル一覧を見る</button>
 
     </div>
-</div>
+</div> -->
 {% endblock content %}
 
 {% block myJs %}
 <script>
-    //id  hard genderRatio alcohol
+//id  hard genderRatio alcohol
+$(document).ready(function() {
+    var $myForm = $(".search-form")
+    $myForm.submit(function(e){
+        e.preventDefault()
+        console.log($(this));
+    })
+})
 </script>
 {% endblock %}
 

@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/7d7b9d8013.js" crossorigin="anonymous"></script>
     <!-- Your CSS -->
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <!-- Google Fonts -->
@@ -29,6 +31,12 @@
         {% block content %}
         {% endblock content %}
     </div>
+    <footer class="py-5 mt-3 bg-light">
+        <div class="container">
+            <p class="m-0 text-center text-dark">Copyright &copy; Circle Finder 2021</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 
     {% include './js.html' %}
     {% block myJs %}

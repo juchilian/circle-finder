@@ -3,9 +3,9 @@ from .views import circle_list_view,circle_detail_view, circle_edit_view, circle
 
 app_name = 'circle'
 urlpatterns = [
-    path('', circle_list_view, name='main-circle-view'),
+    path('', circle_list_view, name='list-circle-view'),
     path('liked/', circle_like_unlike, name='like-circle-view'),
     path('search/', circle_search_view, name='search-circle-view'),
     path('<slug:slug>/', circle_detail_view, name='detail-circle-view'),
-    path('<slug:slug>/edit/', circle_edit_view),
+    path('<slug:slug>/edit/', circle_edit_view, name='edit-circle-view'),
 ]

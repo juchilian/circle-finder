@@ -3,5 +3,5 @@
 
 {% block content %}
     <h1>{{title}}</h1>
-    {% include 'circle/circle-card.html' with circle=circle is_owner=is_owner %}
+    {% include 'circle/circle-card.html' with circle=circle detail=True %}
 {% endblock %}
