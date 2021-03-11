@@ -1,137 +1,222 @@
 {% block myCss %}
 <style>
+.btn-outline-primary:hover {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
 .social-icons {
     list-style-type: none;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: 1rem 0 0 0;
+    justify-content: center;
+    margin: 0 0 0 0;
     padding: 0;
 }
 
 .social-icons li {
     flex-grow: 1;
-    margin-right: 2rem;
+    margin-right: 0;
     text-align: left;
     max-width: 22px;
+}
+
+.social-icons li + li {
+    padding:  0 1rem;
 }
 
 .svg-icon {
     max-width: 22px;
     display: inline-block;
 }
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(50, 97, 226);
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+section {
+    margin: 1.5rem 0;
+}
+
+.section-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 </style>
 {% endblock %}
-<div class="card mb-3" style="max-width: 540px">
+<div class="card mb-3">
     <div class="row no-gutters">
-        <div class="col-md-4 my-auto">
-            <img class="card-img" src="{{ circle.image.url }}">
+        <div class="col-md-4 my-auto" style="background: center/cover url('{{ circle.image.url }}'); height: 200px">
         </div>
         <div class="col-md-8">
             <div class="card-body">
+                {% if not detail %}
+                <!-- 一覧ページの場合 -->
+                    <h5 class="card-title text-center font-weight-bold">
+                        <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a>
+                    </h5>
+                    <section class="areaCircleParameter ">
+                        <h5 class="section-title"></h5>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">活動</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">緩</p>
+                                <input type="range" class="form-range w-75" min="0" max="4" style="float: left" value="{{circle.hard}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">厳</p>
+                            </div>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">男女比</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">男</p>
+                                <input type="range" class="form-range w-75 " min="0" max="100" style="float: left" value="{{circle.gender_rate}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">女</p>
+                            </div>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">お酒</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">無</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" value="{{circle.alcohol}}" style="float: left" disabled>
+                                <p class="mb-0" style="font-size: 15px;">呑</p>
+                            </div>
+                        </div>
+                    </section>
+                {% else %} 
+                <!-- 詳細ページの場合 -->
+                    <section class="areaCircleParameter">
+                        <h5 class="section-title"></h5>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">活動</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">緩</p>
+                                <input type="range" class="form-range w-75" min="0" max="4" style="float: left" value="{{circle.hard}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">厳</p>
+                            </div>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">男女比({{circle.gender_rate}}%)</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">男</p>
+                                <input type="range" class="form-range w-75 " min="0" max="100" style="float: left" value="{{circle.gender_rate}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">女</p>
+                            </div>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">お酒</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">無</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" value="{{circle.alcohol}}" style="float: left" disabled>
+                                <p class="mb-0" style="font-size: 15px;">呑</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="areaCircleContents ">
+                        <h5 class="section-title">アピールポイント</h5>
+                        <div class="content">
+                            <p>{{circle.description}}</p>
+                        </div>
+                    </section>
+                    <section class="circleInfoTable">
+                        <h5 class="section-title">サークル詳細情報</h5>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">人数</th>
+                                    <td>{{circle.members_num}}人</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">男女比</th>
+                                    <td>{{circle.gender_rate}}%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">年会費</th>
+                                    <td>{{circle.budget}}円</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">活動日</th>
+                                    <td>{{circle.practice_date}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">活動場所</th>
+                                    <td>{{circle.practice_place}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="areaSocial">
+                        <h5 class="section-title">各種SNS</h5>
+                        <ul class="social-icons">
+                            {% if circle.twitter_url %}
+                            <li><a href="{{circle.twitter_url}}" target="_blank">
+                                <span style="color: #1DA1F2;"></span>
+                                <i class="fab fa-twitter fa-lg svg-icon"></i>
+                            </a></li>
+                            {% endif %}
+                            {% if circle.insta_url %}
+                            <li><a href="{{circle.insta_url}}" target="_blank">
+                                <span style="color: #CF2E92;">
+                                    <i class="fab fa-instagram fa-lg svg-icon"></i>
+                                </span>
+                            </a></li>
+                            {% endif %}
+                            {% if circle.line_url %}
+                            <li class="disabled"><a href="{{circle.line_url}}" target="_blank">
+                                <span style="color: #00B900;">
+                                    <i class="fab fa-line fa-lg svg-icon"></i>
+                                </span>
+                            </a></li>
+                            {% endif %}
+                        </ul>
+                    </section>
+                {% if request.user == circle.owner %}
+                    <div><a href="/circle/{{circle.slug}}/edit">編集する</a></div>
+                {% endif %}
+                {% endif %}
                 <form action="{% url 'circle:like-circle-view' %}" method="POST" class="like-form" id='{{circle.id}}'>
                     {% csrf_token %}
                     <input type="hidden" name='circle_id' value="{{circle.id}}">
                     {% if request.user not in circle.liked.all %}
-                        <button type="submit" class="btn btn-light border like-btn{{circle.id}}">
+                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block shadow like-btn{{circle.id}}">
                             Like
                         </button>
                         {% else %}
-                        <button type="submit" class="btn btn-primary like-btn{{circle.id}}">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block like-btn{{circle.id}}">
                             Unlike
                         </button>                    
                     {% endif %}
                 </form>
-                {% if not detail %}
-                <!-- 一覧ページの場合 -->
-                <h5 class="card-title">
-                    <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a>
-                </h5>
-                {% else %} 
-                <!-- 詳細ページの場合 -->
-                <h5 class="card-title">{{ circle.name }}</h5>
-                <p>{{ circle.description }}</p>
-                <ul class="social-icons">
-                    {% if circle.twitter_url %}
-                    <li><a href="{{circle.twitter_url}}" target="_blank">
-                        <span style="color: #1DA1F2;"></span>
-                        <i class="fab fa-twitter fa-lg svg-icon"></i>
-                    </a></li>
-                    {% endif %}
-                    {% if circle.insta_url %}
-                    <li><a href="{{circle.insta_url}}" target="_blank">
-                        <span style="color: #CF2E92;">
-                            <i class="fab fa-instagram fa-lg svg-icon"></i>
-                        </span>
-                    </a></li>
-                    {% endif %}
-                    {% if circle.line_url %}
-                    <li class="disabled"><a href="{{circle.line_url}}" target="_blank">
-                        <span style="color: #00B900;">
-                            <i class="fab fa-line fa-lg svg-icon"></i>
-                        </span>
-                    </a></li>
-                    {% endif %}
-                </ul>
-                {% endif %}
             </div>
         </div>
     </div>
 </div>
-{% if request.user == circle.owner %}
-<div><a href="/circle/{{circle.slug}}/edit">編集する</a></div>
 
-{% endif %}
-{% block myJs %}
-<script>
-    $(document).ready(function() {
-        $('.like-form').submit(function(e) {
-            e.preventDefault()
-            {% if request.user.is_authenticated %}
-            // user is logged in
-            const circle_id = $(this).attr('id')
-            const likeBtn = $(`.like-btn${circle_id}`)
-            const likeText = likeBtn.text()
-            const trim = $.trim(likeText)
-
-            // const url = '{% url 'circle:like-circle-view' %}'
-            const url = $(this).attr('action')
-            // let res;
-            // const likes = $(`.like-count${circle_id}`).text()
-            // const trimCount = parseInt(likes)
-            // console.log(trimCount + 1);
-            $.ajax({
-                type:'POST',
-                url: url,
-                data: {
-                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                    'circle_id':circle_id,
-                },
-                success: function(response) {
-                    if(trim === 'Unlike') {
-                        $(`.like-btn${circle_id}`).text('Like')
-                        $(likeBtn).removeClass("btn-primary")
-                        $(likeBtn).addClass("btn-light")
-                    } else {
-                        $(`.like-btn${circle_id}`).text('Unlike')
-                        $(likeBtn).removeClass("btn-light")
-                        $(likeBtn).addClass("btn-primary")
-                    }
-                },
-                error: function(response) {
-                    console.log('error', response);
-                }
-            })
-            {% else %}
-            // not logged in
-                if(window.confirm('この機能を使うにはログインが必要です。\nログインしますか？')){
-                    next_url = location.pathname
-                    redirect_url = "{% url 'account_login' %}" + "?next=" + next_url
-                    window.location = redirect_url
-                }
-            {% endif %}
-        })
-    })
-
-</script>
-{% endblock myJs %}

@@ -21,13 +21,14 @@ class Circle(models.Model):
     description = models.TextField(verbose_name='概要', null=True, blank=True, max_length=400)
     budget = models.PositiveIntegerField(verbose_name='年会費', null=True, blank=True)
     members_num = models.PositiveIntegerField(verbose_name='人数', null=True, blank=True)
-    gender_rate = models.IntegerField(verbose_name='男女比率', choices=GENDER_RATE, validators=[MinValueValidator(0), MaxValueValidator(10)], null=True, blank=True)
+    gender_rate = models.IntegerField(verbose_name='男女比率', choices=GENDER_RATE, null=True, blank=True)
     alcohol = models.IntegerField(verbose_name='飲み会頻度', choices=ALCOHOL_LIST, default=3)
     hard = models.IntegerField(verbose_name='本気度(厳しさ)', choices=HARD_LIST, null=True, blank=True, default=3)
     practice_date = models.CharField(verbose_name='活動日',max_length=20, default='')
     practice_place = models.CharField(verbose_name='活動場所',max_length=20, default='')
     twitter_url = models.URLField(verbose_name='Twitter',null=True, blank=True)
     insta_url = models.URLField(verbose_name='Instagram', null=True, blank=True)
+    line_url = models.URLField(verbose_name='Line', null=True, blank=True)
     liked = models.ManyToManyField(User, blank=True, related_name='likes')
 
     def __str__(self):

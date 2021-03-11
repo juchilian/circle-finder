@@ -2,18 +2,18 @@
 
 {% block content %}
 
-<h1>ようこそ{{ request.user }}さん</h1>
+<h1>マイページ</h1>
 {% if my_circle %}
     <h3>{{ request.user }}さんのサークル</h3>
     {% include 'circle/circle-card.html' with circle=my_circle %}
 {% endif %}
 
-<h3>likeサークル一覧</h3>
+<h3>Likeしたサークル一覧</h3>
 
 {% for user_like in user_likes %}
-<p><a href="{% url 'circle:detail-circle-view' slug=user_like.circle.slug %}">{{ user_like.circle.name }}</a></p>
+    {% include 'circle/circle-card.html' with circle=user_like.circle detail=False %}
 {% empty %}
-<p>現在Likeしたサークルはありません</p>
+    <p>現在Likeしたサークルはありません</p>
 {% endfor %}
 
 

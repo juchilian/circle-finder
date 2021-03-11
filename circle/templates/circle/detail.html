@@ -2,6 +2,11 @@
 
 
 {% block content %}
-    <h1>{{title}}</h1>
+    <h5 class="text-center font-weight-bold py-4 mb-0">{{circle.name}}</h5>
     {% include 'circle/circle-card.html' with circle=circle detail=True %}
+
+{% endblock %}
+
+{% block myJs %}
+{% include 'components/like.html' %}
 {% endblock %}
