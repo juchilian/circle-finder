@@ -15,10 +15,6 @@
     text-align: center;
 }
 
-.jumbotron-extend {
-    background: url(/media/media/image/tennis2.jpg) no-repeat center center;
-    background-size: cover;
-}
 .text{
     text-align: center;
     position:relative;
@@ -44,12 +40,6 @@
 {% block content %}
 
 <div id="carouselExampleIndicators" class="carousel slide my-3" data-ride="carousel" data-touch="true">
-    <!-- <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol> -->
-
     <div class="carousel-inner">
         {% for circle in circles %}
             <div class="carousel-item {% if forloop.first %} active {% endif %}">
@@ -69,13 +59,6 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
-<!-- <div class="jumbotron jumbotron-fluid jumbotron-extend">
-    <div class="container-fluid">
-        <h1>慶應テニサープラットフォーム</h1>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">CONTACT ME</a></p>
-    </div>
-</div> -->
 
 <div class="card my-3">
     <div class="card-body p-1">
