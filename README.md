@@ -8,7 +8,7 @@
 
 # 技術スタック
 フロントエンド HTML, CSS, JS  
-使用フレームワーク Bootstrap, Jquery  
+使用フレームワーク Bootstrap, jQuery  
 バックエンド Python  
 使用フレームワーク Django  
 インフラ AWS(EC2, S3, RDS(PostgreSQL))  
