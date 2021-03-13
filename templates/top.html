@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block myCss %}
 <style>
 .carousel-my-caption {
@@ -79,7 +80,7 @@
 <div class="card my-3">
     <div class="card-body p-1">
         <h5 class="card-title text-center">慶應テニサーマップ</h5>
-        <img src="/media/media/image/tennis_map.jpg" class="w-100 card-img">
+        <img src="{% static "media/image/tennis_map.jpg" %}" class="w-100 card-img">
     </div>
 </div>
 
@@ -144,7 +145,7 @@
 
 <article>
     <div class="contents mt-5">
-        <img src="/media/media/image/puzzle.jpg" alt="" class="backimg ms-5">
+        <img src="{% static "media/image/puzzle.jpg" %}" alt="" class="backimg ms-5">
         <div class="text pt-5">
             <h2 class="pt-3">サークル探し<br>多すぎてわからない</h2><br><br>
             <div class="text-1">
@@ -157,33 +158,6 @@
         </div>		
     </div>
 </article>		
-
-
-<!-- <div class="justify-content-center">
-    {% for circle in circles %}
-        <div class="card mb-3" style="max-width: 540px">
-            <div class="row no-gutters">
-                <div class="col-md-4 my-auto">
-                    <img class="card-img" src="{{ circle.image.url }}">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a></h5>
-                        <p>{{ circle.description|truncatechars:30 }}</p>
-                        <p><a href="{{circle.twitter_url}}" target="_blank">Twitter</a></p>
-                        <p><a href="{{circle.insta_url}}" target="_blank">Instagram</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% empty %}
-        <li>現在掲載されているサークルはありません</li>
-    {% endfor %}
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-primary" onclick="location.href='/circle/'">サークル一覧を見る</button>
-
-    </div>
-</div> -->
 {% endblock content %}
 
 {% block myJs %}
