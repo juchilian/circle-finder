@@ -1,0 +1,47 @@
+<script>
+    $(document).ready(function() {
+        $('.like-form').submit(function(e) {
+            e.preventDefault()
+            {% if request.user.is_authenticated %}
+            // user is logged in
+            const circle_id = $(this).attr('id')
+            const likeBtn = $(`.like-btn${circle_id}`)
+            const likeText = likeBtn.text()
+            const trim = $.trim(likeText)
+            const url = $(this).attr('action')
+
+            $.ajax({
+                type:'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'circle_id':circle_id,
+                },
+                success: function(response) {
+                    if(trim === 'Unlike') {
+                        $(`.like-btn${circle_id}`).text('Like')
+                        $(likeBtn).removeClass("btn-primary")
+                        $(likeBtn).addClass("btn-outline-primary shadow")
+                    } else {
+                        $(`.like-btn${circle_id}`).text('Unlike')
+                        $(likeBtn).removeClass("btn-outline-primary shadow")
+                        $(likeBtn).addClass("btn-primary")
+                    }
+                },
+                error: function(response) {
+                    console.log('error', response);
+                }
+            })
+            {% else %}
+            // not logged in
+                
+                if(window.confirm('この機能を使うにはログインが必要です。\nログインしますか？')){
+                    next_url = location.pathname
+                    redirect_url = "{% url 'account_login' %}" + "?next=" + next_url
+                    window.location = redirect_url
+                }
+            {% endif %}
+        })
+    })
+
+</script>

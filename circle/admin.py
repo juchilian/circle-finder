@@ -1,4 +1,19 @@
 from django.contrib import admin
-from .models import Circle
-# Register your models here.
-admin.site.register(Circle)
+from import_export.admin import ImportExportModelAdmin
+from import_export import resources
+from .models import Circle, Like
+
+class CircleResource(resources.ModelResource):
+    class Meta:
+        model = Circle
+        skip_unchanged = True
+        report_skipped = False        
+
+@admin.register(Circle)
+class CircleAdmin(ImportExportModelAdmin):
+    list_display = ['id', 'name', 'owner']
+    search_fields = ['name']
+    resource_class = CircleResource
+
+
+admin.site.register(Like)

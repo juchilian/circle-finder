@@ -1,0 +1,14 @@
+{% if messages %}
+    {% for message in messages %}
+    <div class="my-3 alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %}" role="alert">
+        {{ message }}
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% block myJs%}
+<script>
+    $(".alert").delay(2000).fadeOut(1000)
+</script>
+{% endblock myJs%}

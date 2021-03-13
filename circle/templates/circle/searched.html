@@ -5,12 +5,12 @@
     <h1 class="my-3">{{ title }}</h1>
 {% endif %}
 <div class="justify-content-center">
-    {% for circle in page.object_list %}
+    {% for circle in circles %}
         {% include 'circle/circle-card.html' with circle=circle detail=False %}
     {% empty %}
         <li>現在掲載されているサークルはありません</li>
     {% endfor %}
-    {% include 'components/paginator.html' %}
+    <!-- {% include 'components/paginator.html' %} -->
 </div>
 {% endblock content %}
 
