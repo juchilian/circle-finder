@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1>マイページ</h1>
+<h1 class="my-3">マイページ</h1>
 {% if my_circle %}
     <h3>{{ request.user }}さんのサークル</h3>
     {% include 'circle/circle-card.html' with circle=my_circle %}
 {% endif %}
 
-<h3>Likeしたサークル一覧</h3>
+<h3 class="py-3">Likeしたサークル一覧</h3>
 
 {% for user_like in user_likes %}
     {% include 'circle/circle-card.html' with circle=user_like.circle detail=False %}

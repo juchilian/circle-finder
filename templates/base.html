@@ -31,14 +31,15 @@
         {% block content %}
         {% endblock content %}
     </div>
+    <!-- /.container -->
     <footer class="py-5 mt-3 bg-light">
         <div class="container">
             <p class="m-0 text-center text-dark">Copyright &copy; Circle Finder 2021</p>
         </div>
-        <!-- /.container -->
     </footer>
 
     {% include './js.html' %}
+    {% include 'components/like.html' %}
     {% block myJs %}
     {% endblock myJs %}
 </body>
