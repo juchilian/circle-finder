@@ -1,5 +1,11 @@
 {% block myCss %}
 <style>
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:active {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
 .btn-outline-primary:hover {
     color: #007bff;
     border-color: #007bff;
@@ -73,7 +79,8 @@ section {
 }
 </style>
 {% endblock %}
-<div class="card mb-3">
+
+<div class="card mb-3 shadow">
     <div class="row no-gutters">
         <div class="col-md-4 my-auto" style="background: center/cover url('{{ circle.image.url }}'); height: 200px">
         </div>
@@ -198,9 +205,6 @@ section {
                             {% endif %}
                         </ul>
                     </section>
-                {% if request.user == circle.owner %}
-                    <div><a href="/circle/{{circle.slug}}/edit">編集する</a></div>
-                {% endif %}
                 {% endif %}
                 <form action="{% url 'circle:like-circle-view' %}" method="POST" class="like-form" id='{{circle.id}}'>
                     {% csrf_token %}
@@ -215,6 +219,10 @@ section {
                         </button>                    
                     {% endif %}
                 </form>
+                {% if request.user == circle.owner %}
+                    <div><a href="/circle/{{circle.slug}}/edit" class="btn btn-primary my-3 shadow">編集する</a></div>
+                {% endif %}
+
             </div>
         </div>
     </div>

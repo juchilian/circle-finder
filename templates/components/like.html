@@ -34,6 +34,7 @@
             })
             {% else %}
             // not logged in
+                
                 if(window.confirm('この機能を使うにはログインが必要です。\nログインしますか？')){
                     next_url = location.pathname
                     redirect_url = "{% url 'account_login' %}" + "?next=" + next_url
