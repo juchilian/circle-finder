@@ -7,9 +7,9 @@
 [Youtube 参考動画](https://youtu.be/gqMYXy_T6iw)
 
 # 技術スタック
-フロントエンド HTML, CSS, JS
-使用フレームワーク Bootstrap, Jquery
-バックエンド Python
-使用フレームワーク Django
-インフラ AWS(EC2, S3, RDS(PostgreSQL))
+フロントエンド HTML, CSS, JS  
+使用フレームワーク Bootstrap, Jquery  
+バックエンド Python  
+使用フレームワーク Django  
+インフラ AWS(EC2, S3, RDS(PostgreSQL))  
 
