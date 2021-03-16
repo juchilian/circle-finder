@@ -8,10 +8,10 @@ class CircleForm(forms.Form):
 
 
 class CircleModelForm(forms.ModelForm):
-    practice_date = forms.CharField(widget=forms.TextInput(attrs={
+    practice_date = forms.CharField(label='活動日',widget=forms.TextInput(attrs={
         'placeholder': '例) 平日毎日、月～水 etc...'
     }))
-    practice_place = forms.CharField(widget=forms.TextInput(attrs={
+    practice_place = forms.CharField(label='活動場所',widget=forms.TextInput(attrs={
         'placeholder': '例) 小机、多摩川 etc...'
     }))
     twitter_url = forms.URLField(widget=forms.TextInput(attrs={
@@ -20,16 +20,9 @@ class CircleModelForm(forms.ModelForm):
     insta_url = forms.URLField(widget=forms.TextInput(attrs={
         'placeholder': '例) https://www.instagram.com/keiotennis'
     }))
+    line_url = forms.URLField(widget=forms.TextInput(attrs={
+        'placeholder': '例) https://line.me/keiotennis'
+    }))
     class Meta:
         model = Circle
-        fields = ['image','description', 'budget', 'members_num', 'gender_rate', 'alcohol', 'hard', 'practice_date', 'practice_place','twitter_url', 'insta_url']
-    
-    # def clean_title(self, *args, **kwargs):
-    #     instance = self.instance
-    #     title = self.cleaned_data.get('title')
-    #     qs = Circle.objects.filter(title__iexact=title)
-    #     if instance is not None: # not newly creating
-    #         qs = qs.exclude(pk=instance.pk)
-    #     if qs.exists():
-    #         raise forms.ValidationError("This title has already been used.")
-    #     return title
+        fields = ['image','description', 'budget', 'members_num', 'gender_rate', 'alcohol', 'hard', 'practice_date', 'practice_place','twitter_url', 'insta_url', 'line_url']

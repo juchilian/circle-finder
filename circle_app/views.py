@@ -11,11 +11,9 @@ def mypage_view(request):
     context = {}
     if request.user.is_staff:
         my_circle = Circle.objects.all().filter(owner=request.user).first()
-        # my_circle = get_object_or_404(Circle, owner=request.user)
         context["my_circle"] = my_circle
     user_likes = Like.objects.filter(user=request.user, value__iexact='Like')
     context["user_likes"] =  user_likes
-    print(context)
     return render(request, template_name, context)
     
 

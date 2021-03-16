@@ -18,7 +18,7 @@ class Circle(models.Model):
     slug = models.SlugField(verbose_name='スラッグ', unique=True)
     image = models.ImageField(verbose_name='サークル画像', upload_to='media/image/', blank=True, null=True)
     name =  models.CharField(verbose_name='サークル名', max_length=100)
-    description = models.TextField(verbose_name='概要', null=True, blank=True, max_length=400)
+    description = models.TextField(verbose_name='アピールポイント', null=True, blank=True, max_length=400)
     budget = models.PositiveIntegerField(verbose_name='年会費', null=True, blank=True)
     members_num = models.PositiveIntegerField(verbose_name='人数', null=True, blank=True)
     gender_rate = models.IntegerField(verbose_name='男女比率', choices=GENDER_RATE, null=True, blank=True)
@@ -49,7 +49,7 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     circle = models.ForeignKey(Circle, on_delete=models.CASCADE)
     value = models.CharField(choices=LIKE_CHOICES, max_length=8)
-    updated = models.DateTimeField(auto_now=True) 
+    updated = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -43,7 +43,7 @@ input[type=range]{
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
+    width: 75%;
     height: 5px;
     background: #ddd;
     border: none;
@@ -77,14 +77,36 @@ section {
     font-weight: bold;
     margin-bottom: 1rem;
 }
+
+.circle-img {
+    height: 200px;
+}
+/* iPhone 縦 */
+
+@media screen and (min-width:480px) { 
+    /*　for iPhone Landscape　(iPhone 横)　*/
+
+}
+@media screen and (min-width:768px) and ( max-width:1024px) {
+    /*　for iPad 　*/
+    .circle-img {
+        height: 300px;
+    }
+}
+@media screen and (min-width:1024px) {
+    /*　for PC　*/
+    .circle-img {
+        height: 300px;
+    }
+}
 </style>
 {% endblock %}
 
 <div class="card mb-3 shadow">
     <div class="row no-gutters">
-        <div class="col-md-4 my-auto" style="background: center/cover url('{{ circle.image.url }}'); height: 200px">
+        <div class="col-md-6 my-auto circle-img" style="background: center/cover url('{{ circle.image.url }}');">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card-body">
                 {% if not detail %}
                 <!-- 一覧ページの場合 -->
@@ -159,23 +181,43 @@ section {
                             <tbody>
                                 <tr>
                                     <th scope="row">人数</th>
-                                    <td>{{circle.members_num}}人</td>
+                                    {% if circle.members_num %}
+                                    <td>{{ circle.members_num }}人</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">男女比</th>
+                                    {% if circle.gender_rate %}
                                     <td>{{circle.gender_rate}}%</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">年会費</th>
+                                    {% if circle.budget %}
                                     <td>{{circle.budget}}円</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">活動日</th>
+                                    {% if circle.practice_date %}
                                     <td>{{circle.practice_date}}</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">活動場所</th>
+                                    {% if circle.practice_place %}
                                     <td>{{circle.practice_place}}</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                             </tbody>
                         </table>
