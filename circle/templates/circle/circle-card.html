@@ -43,7 +43,7 @@ input[type=range]{
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
+    width: 75%;
     height: 5px;
     background: #ddd;
     border: none;
@@ -181,23 +181,43 @@ section {
                             <tbody>
                                 <tr>
                                     <th scope="row">人数</th>
-                                    <td>{{circle.members_num}}人</td>
+                                    {% if circle.members_num %}
+                                    <td>{{ circle.members_num }}人</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">男女比</th>
+                                    {% if circle.gender_rate %}
                                     <td>{{circle.gender_rate}}%</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">年会費</th>
+                                    {% if circle.budget %}
                                     <td>{{circle.budget}}円</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">活動日</th>
+                                    {% if circle.practice_date %}
                                     <td>{{circle.practice_date}}</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <th scope="row">活動場所</th>
+                                    {% if circle.practice_place %}
                                     <td>{{circle.practice_place}}</td>
+                                    {% else %}
+                                    <td>未公開</td>
+                                    {% endif %}
                                 </tr>
                             </tbody>
                         </table>

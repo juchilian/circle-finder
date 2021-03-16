@@ -2,6 +2,41 @@
 {% load staticfiles %}
 {% block myCss %}
 <style>
+
+.carousel-item img {
+    height: 200px;
+    object-fit:cover;
+}
+
+/* iPhone 縦 */
+.backimg {
+    z-index: -1;
+    position:absolute;
+    height: auto;
+    width:35vw;
+}
+@media screen and (min-width:480px) { 
+    /*　for iPhone Landscape　(iPhone 横)　*/
+    .carousel-item img {
+        height: 200px;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1024px) {
+    /*　for iPad 　*/
+    .carousel-item img {
+        height: 300px;
+    }
+}
+@media screen and (min-width:1024px) {
+    /*　for PC　*/
+    .carousel-item img {
+        height: 400px;
+    }
+    .backimg {
+        display: none;
+    }
+}
+
 .carousel-my-caption {
     background-color:rgba(248,249,250, 0.8);;
     position: absolute;
@@ -28,12 +63,6 @@
     text-align: left;
     display: inline-block;
 }
-.backimg{
-    z-index: -1;
-    position:absolute;
-    height: auto;
-    width:35vw;
-}
 </style>
 {% endblock %}
 
@@ -43,7 +72,7 @@
     <div class="carousel-inner">
         {% for circle in circles %}
             <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                <img src="{{ circle.image.url }}" class="d-block slide w-100" style="height: 200px; object-fit:cover;" alt="{{ circle.name}}画像">
+                <img src="{{ circle.image.url }}" class="d-block slide w-100" alt="{{ circle.name}}画像">
                 <div class="carousel-my-caption">
                     <p class="m-0 font-weight-bold text-shadow text-dark">{{ circle.name }}</p>
                 </div>
@@ -61,9 +90,9 @@
 </div>
 
 <div class="card my-3">
-    <div class="card-body p-1">
-        <h5 class="card-title text-center">慶應テニサーマップ</h5>
-        <img src="{% static "media/image/tennis_map.jpg" %}" class="w-100 card-img">
+    <div class="card-body p-1 text-center">
+        <h5 class="card-title">慶應テニサーマップ</h5>
+        <img src="{% static "media/image/tennis_map.jpg" %}" class="w-100 card-img" style="max-width: 800px;">
     </div>
 </div>
 
@@ -127,7 +156,7 @@
 </div>
 
 <article>
-    <div class="contents mt-5">
+    <div class="contents mt-5 mt-lg-4">
         <img src="{% static "media/image/puzzle.jpg" %}" alt="" class="backimg ms-5">
         <div class="text pt-5">
             <h2 class="pt-3">サークル探し<br>多すぎてわからない</h2><br><br>
