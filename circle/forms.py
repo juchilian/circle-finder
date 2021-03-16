@@ -23,13 +23,3 @@ class CircleModelForm(forms.ModelForm):
     class Meta:
         model = Circle
         fields = ['image','description', 'budget', 'members_num', 'gender_rate', 'alcohol', 'hard', 'practice_date', 'practice_place','twitter_url', 'insta_url']
-    
-    # def clean_title(self, *args, **kwargs):
-    #     instance = self.instance
-    #     title = self.cleaned_data.get('title')
-    #     qs = Circle.objects.filter(title__iexact=title)
-    #     if instance is not None: # not newly creating
-    #         qs = qs.exclude(pk=instance.pk)
-    #     if qs.exists():
-    #         raise forms.ValidationError("This title has already been used.")
-    #     return title

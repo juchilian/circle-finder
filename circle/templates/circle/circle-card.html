@@ -77,14 +77,36 @@ section {
     font-weight: bold;
     margin-bottom: 1rem;
 }
+
+.circle-img {
+    height: 200px;
+}
+/* iPhone 縦 */
+
+@media screen and (min-width:480px) { 
+    /*　for iPhone Landscape　(iPhone 横)　*/
+
+}
+@media screen and (min-width:768px) and ( max-width:1024px) {
+    /*　for iPad 　*/
+    .circle-img {
+        height: 300px;
+    }
+}
+@media screen and (min-width:1024px) {
+    /*　for PC　*/
+    .circle-img {
+        height: 300px;
+    }
+}
 </style>
 {% endblock %}
 
 <div class="card mb-3 shadow">
     <div class="row no-gutters">
-        <div class="col-md-4 my-auto" style="background: center/cover url('{{ circle.image.url }}'); height: 200px">
+        <div class="col-md-6 my-auto circle-img" style="background: center/cover url('{{ circle.image.url }}');">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card-body">
                 {% if not detail %}
                 <!-- 一覧ページの場合 -->
