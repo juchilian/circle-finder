@@ -12,7 +12,15 @@ URL: https://circle-finder.com
 使用フレームワーク Bootstrap, jQuery  
 バックエンド Python  
 使用フレームワーク Django  
+データベース PostgreSQL  
 インフラ AWS(EC2, S3, RDS(PostgreSQL))  
+Webサーバ Nginx
+アプリケーションサーバ Gunicorn
+
 
 # 機能一覧
-- 
+- サークル編集者によるサークル情報編集機能
+- 認証機能(サインアップ、ログイン、ログアウト)
+- ページネーション機能
+- Like機能(jQueryのAjaxで実装)
+- 最適サークル診断機能(未完成)
