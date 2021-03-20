@@ -110,13 +110,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             {% if request.user.is_authenticated %}
-            <div class="modal-body">
-                <form action="{% url 'circle:search-circle-view'%}" class="search-form"> {% csrf_token %}
+            <form action="{% url 'circle:search-circle-view'%}" class="search-form"> {% csrf_token %}
+                <div class="modal-body">
                     <div class="bar-container mb-3">
                         <p class="text-center mb-0">活動</p>
                         <div class="d-flex justify-content-center">
                             <p class="mb-0" style="font-size: 15px;">緩</p>
-                            <input type="range" class="form-range w-75 " min="0" max="4" id="hard" style="float: left">
+                            <input type="range" class="form-range w-75 " min="0" max="4" name="hard" style="float: left">
                             <p class="mb-0" style="font-size: 15px;">厳</p>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         <p class="text-center mb-0">男女比</p>
                         <div class="d-flex justify-content-center">
                             <p class="mb-0" style="font-size: 15px;">男</p>
-                            <input type="range" class="form-range w-75 " min="0" max="4" id="genderRatio" style="float: left">
+                            <input type="range" class="form-range w-75 " min="0" max="4" name="genderRatio" style="float: left">
                             <p class="mb-0" style="font-size: 15px;">女</p>
                         </div>
                     </div>
@@ -132,16 +132,16 @@
                         <p class="text-center mb-0">お酒</p>
                         <div class="d-flex justify-content-center">
                             <p class="mb-0" style="font-size: 15px;">無</p>
-                            <input type="range" class="form-range w-75 " min="0" max="4" id="alcohol" style="float: left">
+                            <input type="range" class="form-range w-75 " min="0" max="4" name="alcohol" style="float: left">
                             <p class="mb-0" style="font-size: 15px;">呑</p>
                         </div>
                     </div>                    
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-                <button type="submit" class="btn btn-primary" onclick="location.href='{% url 'circle:search-circle-view' %}'">検索する</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                    <button type="submit" class="btn btn-primary">検索する</button>
+                </div>
+            </form>
             {% else %}
             <div class="modal-body">
                 この機能を使うにはログインが必要です。
@@ -175,13 +175,14 @@
 {% block myJs %}
 <script>
 //id  hard genderRatio alcohol
-$(document).ready(function() {
-    var $myForm = $(".search-form")
-    $myForm.submit(function(e){
-        e.preventDefault()
-        console.log($(this));
-    })
-})
+// $(document).ready(function() {
+//     var $myForm = $(".search-form")
+//     $myForm.submit(function(e){
+//         e.preventDefault()
+//         var param = $(this).serializeArray()
+//         console.log(param);
+//     })
+// })
 </script>
 {% endblock %}
 
