@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import F
+from django.db.models import Func, F
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Circle, Like
@@ -94,9 +94,9 @@ def circle_like_unlike(request):
 
 def circle_search_view(request):
     hard = request.GET.get('hard')
-    gender_ratio = request.GET.get('genderRatio')
+    gender_rate = request.GET.get('genderRate')
     alcohol = request.GET.get('alcohol')
-    print(hard, gender_ratio, alcohol)
+    print(hard, gender_rate, alcohol)
     # all_circles_qs = Circle.objects.all()
     # scores = []
     # ideal way 
@@ -107,7 +107,7 @@ def circle_search_view(request):
     #     scores.append(score)
     # print(scores)
     # searched_circles = Circle.objects.search(query)[:3]
-    searched_circles = Circle.objects.all()[:3]
+    searched_circles = Circle.objects.annotate(score=Func(F('hard') - hard, 2, function='Power')+Func(F('gender_rate') - gender_rate, 2, function='Power')+Func(F('alcohol') - alcohol, 2, function='Power')).order_by('score')[:3]
     context = {"title": "サークル検索結果", 'circles': searched_circles}
     template_name = 'circle/searched.html'
     return render(request, template_name, context)
