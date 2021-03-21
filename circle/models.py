@@ -8,6 +8,8 @@ User = settings.AUTH_USER_MODEL
 ALCOHOL_LIST = ((0, '少なめもしくは無'),(1, 'どちらかといえば少なめ'),(2, '普通'),(3, 'どちらかといえば多め'),(4, '多め'))
 HARD_LIST = ((0, '緩め'),(1, 'どちらかといえば緩め'),(2, '普通'),(3, 'どちらかというとまじめ'),(4, 'まじめ'))
 GENDER_RATE = ((0, '0%'),(1, '10%'),(2, '20%'),(3, '30%'),(4, '40%'),(50, '50%'),(6, '60%'),(7, '70%'),(8, '80%'),(9, '90%'),(10, '100%'))
+EXPERIENCED_LIST = ((0, '20%以下'),(1, '20% ～ 40%'),(2, '40% ～ 60%'),(3, '60% ～ 80%'),(4, '80%以上'))
+EVENT_LIST = ((0, '少なめもしくは無'),(1, 'どちらかといえば少なめ'),(2, '普通'),(3, 'どちらかといえば多め'),(4, '多め'))
 
 class Circle(models.Model):
     class Meta:
@@ -23,7 +25,9 @@ class Circle(models.Model):
     members_num = models.PositiveIntegerField(verbose_name='人数', null=True, blank=True)
     gender_rate = models.IntegerField(verbose_name='男女比率', choices=GENDER_RATE, null=True, blank=True)
     alcohol = models.IntegerField(verbose_name='飲み会頻度', choices=ALCOHOL_LIST, default=3)
-    hard = models.IntegerField(verbose_name='本気度(厳しさ)', choices=HARD_LIST, null=True, blank=True, default=3)
+    hard = models.IntegerField(verbose_name='練習雰囲気', choices=HARD_LIST, null=True, blank=True, default=3)
+    experienced = models.IntegerField(verbose_name="テニス経験者率", choices=EXPERIENCED_LIST, null=True, blank=True)
+    event = models.IntegerField(verbose_name="イベント頻度", choices=EVENT_LIST, null=True, blank=True)
     practice_date = models.CharField(verbose_name='活動日',max_length=20, default='', null=True, blank=True)
     practice_place = models.CharField(verbose_name='活動場所',max_length=20, default='', null=True, blank=True)
     twitter_url = models.URLField(verbose_name='Twitter',null=True, blank=True)
