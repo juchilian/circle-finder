@@ -96,17 +96,6 @@ def circle_search_view(request):
     hard = request.GET.get('hard')
     gender_rate = request.GET.get('genderRate')
     alcohol = request.GET.get('alcohol')
-    print(hard, gender_rate, alcohol)
-    # all_circles_qs = Circle.objects.all()
-    # scores = []
-    # ideal way 
-    # searched_circles = all().order_by(score)
-    # for i, circle in enumerate(all_circles_qs):
-    #     # F('')
-    #     score = (circle.hard - hard)**2 + (circle.gender_rate - gender_ratio)**2 + (circle.alcohol - alcohol)**2
-    #     scores.append(score)
-    # print(scores)
-    # searched_circles = Circle.objects.search(query)[:3]
     searched_circles = Circle.objects.annotate(score=Func(F('hard') - hard, 2, function='Power')+Func(F('gender_rate') - gender_rate, 2, function='Power')+Func(F('alcohol') - alcohol, 2, function='Power')).order_by('score')[:3]
     context = {"title": "サークル検索結果", 'circles': searched_circles}
     template_name = 'circle/searched.html'
