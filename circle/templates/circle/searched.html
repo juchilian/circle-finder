@@ -6,6 +6,7 @@
 {% endif %}
 <div class="justify-content-center">
     {% for circle in circles %}
+        <h3 class="test-center">第{{forloop.counter}}位</h3>
         {% include 'circle/circle-card.html' with circle=circle detail=False %}
     {% empty %}
         <li>現在掲載されているサークルはありません</li>
