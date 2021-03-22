@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.db.models import Func, F
 from django.http import Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Circle, Like
+from .models import Circle, Like, HARD_LIST, ALCOHOL_LIST, EXPERIENCED_LIST, EVENT_LIST
 from .forms import CircleModelForm
 # Create your views here.
 
@@ -98,6 +98,7 @@ def circle_search_view(request):
     alcohol = request.GET.get('alcohol')
     searched_circles = Circle.objects.annotate(score=Func(F('hard') - hard, 2, function='Power')+Func(F('experienced') - experienced, 2, function='Power')+Func(F('alcohol') - alcohol, 2, function='Power')).order_by('score')[:3]
     context = {"title": "最適サークル検索結果", 'circles': searched_circles}
+    context["params"] = {HARD_LIST, ALCOHOL_LIST, EXPERIENCED_LIST, EVENT_LIST}
     template_name = 'circle/searched.html'
     return render(request, template_name, context)
         

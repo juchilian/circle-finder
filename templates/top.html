@@ -112,7 +112,6 @@
             {% if request.user.is_authenticated %}
             <form action="{% url 'circle:search-circle-view'%}" class="search-form"> {% csrf_token %}
                 <div class="modal-body">
-                    <h5 class="section-title"></h5>
                     <div class="bar-container mb-3">
                         <p class="text-center mb-0">練習雰囲気</p>
                         <div class="d-flex justify-content-center mx-auto">
@@ -120,6 +119,7 @@
                             <input type="range" class="form-range w-75" min="0" max="4" name="hard">
                             <p class="mb-0" style="font-size: 15px;">厳</p>
                         </div>
+                        <p class="small text-center"><span class="current-value"></span></p>
                     </div>
                     <div class="bar-container mb-3">
                         <p class="text-center mb-0">テニス経験者</p>
@@ -128,6 +128,7 @@
                             <input type="range" class="form-range w-75 " min="0" max="4" name="experienced">
                             <p class="mb-0" style="font-size: 15px;">多</p>
                         </div>
+                        <p class="small text-center"><span class="current-value"></span></p>
                     </div>
                     <div class="bar-container mb-3">
                         <p class="text-center mb-0">お酒</p>
@@ -136,6 +137,7 @@
                             <input type="range" class="form-range w-75 " min="0" max="4" name="alcohol">
                             <p class="mb-0" style="font-size: 15px;">呑</p>
                         </div>
+                        <p class="small text-center"><span class="current-value"></span></p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -175,15 +177,27 @@
 
 {% block myJs %}
 <script>
-//id  hard genderRate alcohol
-// $(document).ready(function() {
-//     var $myForm = $(".search-form")
-//     $myForm.submit(function(e){
-//         e.preventDefault()
-//         var param = $(this).serializeArray()
-//         console.log(param);
-//     })
-// })
+
+const param_obj = {
+    'hard': ['緩め', 'どちらかといえば緩め', '普通', 'どちらかというとまじめ', 'まじめ'],
+    'experienced': ['10%以下', '10% ～ 20%', '20% ～ 40%', '40% ～ 60%', '60%以上'],
+    'alcohol': ['少なめもしくは無', 'どちらかといえば少なめ', '普通', 'どちらかといえば多め', '多め']
+}
+
+// input要素
+var inputElems = document.getElementsByClassName('form-range')
+// 埋め込む先の要素
+var currentValueElems = document.getElementsByClassName('current-value')
+
+window.onload = () => {
+    for(let i=0; i<currentValueElems.length; i++) {
+        currentValueElems[i].textContent = param_obj[inputElems[i].name][inputElems[i].value]
+        inputElems[i].addEventListener('input', (event) => {
+            currentValueElems[i].textContent = param_obj[event.target.name][event.target.value]
+        });
+    }
+}
+
 </script>
 {% endblock %}
 

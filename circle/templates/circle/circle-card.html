@@ -60,6 +60,16 @@ input[type=range]::-webkit-slider-thumb {
     margin-top: -4px;
 }
 
+input[type=range]:hover:-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(50, 97, 226);
+    margin-top: -4px;
+}
+
 input[type=range]:focus {
     outline: none;
 }
@@ -148,7 +158,7 @@ section {
                             <p class="text-center mb-0">練習雰囲気</p>
                             <div class="d-flex justify-content-center mx-auto">
                                 <p class="mb-0 text-right" style="font-size: 15px;">緩</p>
-                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.hard}}" disabled>
+                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.hard}}" disabled data-toggle="tooltip" data-placement="top" title="{{circle.hard}}">
                                 <p class="mb-0" style="font-size: 15px;">真</p>
                             </div>
                         </div>
@@ -269,3 +279,11 @@ section {
         </div>
     </div>
 </div>
+
+{% block myJs %}
+<script>
+    {% if detail %}
+
+    {% endif %}
+</script>
+{% endblock %}
