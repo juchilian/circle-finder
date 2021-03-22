@@ -158,25 +158,28 @@ section {
                             <p class="text-center mb-0">練習雰囲気</p>
                             <div class="d-flex justify-content-center mx-auto">
                                 <p class="mb-0 text-right" style="font-size: 15px;">緩</p>
-                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.hard}}" disabled data-toggle="tooltip" data-placement="top" title="{{circle.hard}}">
+                                <input type="range" class="form-range w-75" min="0" max="4" name='hard' value="{{circle.hard}}" disabled>
                                 <p class="mb-0" style="font-size: 15px;">真</p>
                             </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
                         </div>
                         <div class="bar-container mb-3">
                             <p class="text-center mb-0">テニス経験者</p>
                             <div class="d-flex justify-content-center">
                                 <p class="mb-0" style="font-size: 15px;">少</p>
-                                <input type="range" class="form-range w-75 " min="0" max="4" style="float: left" value="{{circle.experienced}}" disabled>
+                                <input type="range" class="form-range w-75 " min="0" max="4" name='experienced' value="{{circle.experienced}}" disabled>
                                 <p class="mb-0" style="font-size: 15px;">多</p>
                             </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
                         </div>
                         <div class="bar-container mb-3">
                             <p class="text-center mb-0">お酒</p>
                             <div class="d-flex justify-content-center">
                                 <p class="mb-0" style="font-size: 15px;">無</p>
-                                <input type="range" class="form-range w-75 " min="0" max="4" value="{{circle.alcohol}}" style="float: left" disabled>
+                                <input type="range" class="form-range w-75 " min="0" max="4" name='alcohol' value="{{circle.alcohol}}" disabled>
                                 <p class="mb-0" style="font-size: 15px;">呑</p>
                             </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
                         </div>
                     </section>
                     <section class="areaCircleContents ">
@@ -200,7 +203,7 @@ section {
                                 <tr>
                                     <th scope="row">男女比</th>
                                     {% if circle.gender_rate %}
-                                    <td>{{circle.gender_rate}}%</td>
+                                    <td>{{circle.gender_rate}}0%</td>
                                     {% else %}
                                     <td>未公開</td>
                                     {% endif %}
@@ -281,9 +284,24 @@ section {
 </div>
 
 {% block myJs %}
+{% if detail %}
 <script>
-    {% if detail %}
+    const param_obj = {
+        'hard': ['緩め', 'どちらかといえば緩め', '普通', 'どちらかというとまじめ', 'まじめ'],
+        'experienced': ['10%以下', '10% ～ 20%', '20% ～ 40%', '40% ～ 60%', '60%以上'],
+        'alcohol': ['少なめもしくは無', 'どちらかといえば少なめ', '普通', 'どちらかといえば多め', '多め']
+    }
 
-    {% endif %}
+    // input要素
+    var inputElems = document.getElementsByClassName('form-range')
+    // 埋め込む先の要素
+    var currentValueElems = document.getElementsByClassName('current-value')
+
+    window.onload = () => {
+        for(let i=0; i<currentValueElems.length; i++) {
+            currentValueElems[i].textContent = param_obj[inputElems[i].name][inputElems[i].value]
+        }
+    }
 </script>
+{% endif %}
 {% endblock %}
