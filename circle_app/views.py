@@ -3,7 +3,7 @@ from circle.models import Circle, Like
 
 def top_view(request):
     template_name = 'top.html'
-    top_circle_list = Circle.objects.all()[:3]
+    top_circle_list = Circle.objects.order_by('?')[:4]
     return render(request, template_name, context={"circles":top_circle_list})
 
 def mypage_view(request):
