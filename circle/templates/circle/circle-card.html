@@ -60,6 +60,16 @@ input[type=range]::-webkit-slider-thumb {
     margin-top: -4px;
 }
 
+input[type=range]:hover:-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: rgb(50, 97, 226);
+    margin-top: -4px;
+}
+
 input[type=range]:focus {
     outline: none;
 }
@@ -113,51 +123,22 @@ section {
                     <h5 class="card-title text-center font-weight-bold">
                         <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">{{ circle.name }}</a>
                     </h5>
-                    <section class="areaCircleParameter ">
-                        <h5 class="section-title"></h5>
-                        <div class="bar-container mb-3">
-                            <p class="text-center mb-0">活動</p>
-                            <div class="d-flex justify-content-center">
-                                <p class="mb-0" style="font-size: 15px;">緩</p>
-                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.hard}}" disabled>
-                                <p class="mb-0" style="font-size: 15px;">厳</p>
-                            </div>
-                        </div>
-                        <div class="bar-container mb-3">
-                            <p class="text-center mb-0">男女比</p>
-                            <div class="d-flex justify-content-center">
-                                <p class="mb-0" style="font-size: 15px;">男</p>
-                                <input type="range" class="form-range w-75" min="0" max="100" value="{{circle.gender_rate}}" disabled>
-                                <p class="mb-0" style="font-size: 15px;">女</p>
-                            </div>
-                        </div>
-                        <div class="bar-container mb-3">
-                            <p class="text-center mb-0">お酒</p>
-                            <div class="d-flex justify-content-center">
-                                <p class="mb-0" style="font-size: 15px;">無</p>
-                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.alcohol}}" disabled>
-                                <p class="mb-0" style="font-size: 15px;">呑</p>
-                            </div>
-                        </div>
-                    </section>
-                {% else %} 
-                <!-- 詳細ページの場合 -->
                     <section class="areaCircleParameter">
                         <h5 class="section-title"></h5>
                         <div class="bar-container mb-3">
-                            <p class="text-center mb-0">活動</p>
-                            <div class="d-flex justify-content-center">
-                                <p class="mb-0" style="font-size: 15px;">緩</p>
-                                <input type="range" class="form-range w-75" min="0" max="4" style="float: left" value="{{circle.hard}}" disabled>
-                                <p class="mb-0" style="font-size: 15px;">厳</p>
+                            <p class="text-center mb-0">練習雰囲気</p>
+                            <div class="d-flex justify-content-center mx-auto">
+                                <p class="mb-0 text-right" style="font-size: 15px;">緩</p>
+                                <input type="range" class="form-range w-75" min="0" max="4" value="{{circle.hard}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">真</p>
                             </div>
                         </div>
                         <div class="bar-container mb-3">
-                            <p class="text-center mb-0">男女比</p>
+                            <p class="text-center mb-0">テニス経験者</p>
                             <div class="d-flex justify-content-center">
-                                <p class="mb-0" style="font-size: 15px;">男</p>
-                                <input type="range" class="form-range w-75 " min="0" max="100" style="float: left" value="{{circle.gender_rate}}" disabled>
-                                <p class="mb-0" style="font-size: 15px;">女</p>
+                                <p class="mb-0" style="font-size: 15px;">少</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" style="float: left" value="{{circle.experienced}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">多</p>
                             </div>
                         </div>
                         <div class="bar-container mb-3">
@@ -167,6 +148,38 @@ section {
                                 <input type="range" class="form-range w-75 " min="0" max="4" value="{{circle.alcohol}}" style="float: left" disabled>
                                 <p class="mb-0" style="font-size: 15px;">呑</p>
                             </div>
+                        </div>
+                    </section>
+                {% else %} 
+                <!-- 詳細ページの場合 -->
+                    <section class="areaCircleParameter">
+                        <h5 class="section-title"></h5>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">練習雰囲気</p>
+                            <div class="d-flex justify-content-center mx-auto">
+                                <p class="mb-0 text-right" style="font-size: 15px;">緩</p>
+                                <input type="range" class="form-range w-75" min="0" max="4" name='hard' value="{{circle.hard}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">真</p>
+                            </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">テニス経験者</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">少</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" name='experienced' value="{{circle.experienced}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">多</p>
+                            </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
+                        </div>
+                        <div class="bar-container mb-3">
+                            <p class="text-center mb-0">お酒</p>
+                            <div class="d-flex justify-content-center">
+                                <p class="mb-0" style="font-size: 15px;">無</p>
+                                <input type="range" class="form-range w-75 " min="0" max="4" name='alcohol' value="{{circle.alcohol}}" disabled>
+                                <p class="mb-0" style="font-size: 15px;">呑</p>
+                            </div>
+                            <p class="small text-center"><span class="current-value"></span></p>
                         </div>
                     </section>
                     <section class="areaCircleContents ">
@@ -190,7 +203,7 @@ section {
                                 <tr>
                                     <th scope="row">男女比</th>
                                     {% if circle.gender_rate %}
-                                    <td>{{circle.gender_rate}}%</td>
+                                    <td>{{circle.gender_rate}}0%</td>
                                     {% else %}
                                     <td>未公開</td>
                                     {% endif %}
@@ -269,3 +282,26 @@ section {
         </div>
     </div>
 </div>
+
+{% block myJs %}
+{% if detail %}
+<script>
+    const param_obj = {
+        'hard': ['緩め', 'どちらかといえば緩め', '普通', 'どちらかというとまじめ', 'まじめ'],
+        'experienced': ['10%以下', '10% ～ 20%', '20% ～ 40%', '40% ～ 60%', '60%以上'],
+        'alcohol': ['少なめもしくは無', 'どちらかといえば少なめ', '普通', 'どちらかといえば多め', '多め']
+    }
+
+    // input要素
+    var inputElems = document.getElementsByClassName('form-range')
+    // 埋め込む先の要素
+    var currentValueElems = document.getElementsByClassName('current-value')
+
+    window.onload = () => {
+        for(let i=0; i<currentValueElems.length; i++) {
+            currentValueElems[i].textContent = param_obj[inputElems[i].name][inputElems[i].value]
+        }
+    }
+</script>
+{% endif %}
+{% endblock %}
