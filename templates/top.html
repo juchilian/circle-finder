@@ -72,10 +72,12 @@
     <div class="carousel-inner">
         {% for circle in circles %}
             <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                <img src="{{ circle.image.url }}" class="d-block slide w-100" alt="{{ circle.name}}画像">
-                <div class="carousel-my-caption">
-                    <p class="m-0 font-weight-bold text-shadow text-dark">{{ circle.name }}</p>
-                </div>
+                <a href="{% url 'circle:detail-circle-view' slug=circle.slug %}">
+                    <img src="{{ circle.image.url }}" class="d-block slide w-100" alt="{{ circle.name}}画像">
+                    <div class="carousel-my-caption">
+                        <p class="m-0 font-weight-bold text-shadow text-dark">{{ circle.name }}</p>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     </div>
