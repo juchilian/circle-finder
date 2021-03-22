@@ -94,10 +94,10 @@ def circle_like_unlike(request):
 
 def circle_search_view(request):
     hard = request.GET.get('hard')
-    gender_rate = request.GET.get('genderRate')
+    experienced = request.GET.get('experienced')
     alcohol = request.GET.get('alcohol')
-    searched_circles = Circle.objects.annotate(score=Func(F('hard') - hard, 2, function='Power')+Func(F('gender_rate') - gender_rate, 2, function='Power')+Func(F('alcohol') - alcohol, 2, function='Power')).order_by('score')[:3]
-    context = {"title": "サークル検索結果", 'circles': searched_circles}
+    searched_circles = Circle.objects.annotate(score=Func(F('hard') - hard, 2, function='Power')+Func(F('experienced') - experienced, 2, function='Power')+Func(F('alcohol') - alcohol, 2, function='Power')).order_by('score')[:3]
+    context = {"title": "最適サークル検索結果", 'circles': searched_circles}
     template_name = 'circle/searched.html'
     return render(request, template_name, context)
         

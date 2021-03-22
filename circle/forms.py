@@ -20,4 +20,4 @@ class CircleModelForm(forms.ModelForm):
     }))
     class Meta:
         model = Circle
-        fields = ['image','description', 'budget', 'members_num', 'gender_rate', 'alcohol', 'hard', 'practice_date', 'practice_place','twitter_url', 'insta_url', 'line_url']
+        fields = ['image','description', 'budget', 'members_num', 'gender_rate', 'alcohol', 'hard', 'experienced', 'event', 'practice_date', 'practice_place','twitter_url', 'insta_url', 'line_url']
