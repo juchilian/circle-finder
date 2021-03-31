@@ -13,7 +13,7 @@ URL: https://circle-finder.com
 バックエンド Python  
 使用フレームワーク Django  
 データベース PostgreSQL  
-インフラ AWS(EC2, S3, RDS(PostgreSQL))  
+インフラ AWS(EC2, S3, RDS(PostgreSQL), Route53)  
 Webサーバ Nginx
 アプリケーションサーバ Gunicorn
 
@@ -23,4 +23,4 @@ Webサーバ Nginx
 - 認証機能(サインアップ、ログイン、ログアウト)
 - ページネーション機能
 - Like機能(jQueryのAjaxで実装)
-- 最適サークル診断機能(未完成)
+- 最適サークル診断機能
